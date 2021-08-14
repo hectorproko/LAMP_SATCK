@@ -237,4 +237,9 @@ Save and close the file <br />
 * Before we test this php code make sure **index.html** is not present inside of **/var/www/projectlamp** by default Apache gives precendence to index.html over index.php when looking for page.
 
 * Once removed open your browser and navigate to you page using public IP or DNS
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/hellolamp.png)
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/phppage.png)
+
+* Your site is now displaying senstive information to the world so once done delete **index.php**
+```bash
+sudo rm /var/www/projectlamp/index.php
+```
