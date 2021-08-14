@@ -101,3 +101,20 @@ Make sure when you run the command that your current working directory in the te
 * You should now be able to see Apache's dummy page <br />
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/dummyPage.png) 
 
+
+## INSTALLING MYSQL
+---
+
+* We will again use **apt** to install this software
+```bash
+sudo apt install mysql-server
+```
+* When prompted, confirm installation by typing **Y**, and then **ENTER**.
+* Once installation is done we will run a script that removes some insecure default settings and lock down access to your database system. To start the interactive script run:
+```bash
+sudo mysql_secure_installation
+```
+And follow the wizard like questions
+* Will ask if you want to configure the VALIDATE PASSWORD PLUGIN. I'll put yes for an additioanl layer of security
+
+
