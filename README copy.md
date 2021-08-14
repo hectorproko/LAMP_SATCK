@@ -156,4 +156,85 @@ Create the directory for **projectlamp** using **mkdir** command as follows:
 ```bash
 sudo mkdir /var/www/projectlamp
 ```
-* Next, we'll assign ownership of the directory with our current system user:
+* Next, we'll assign ownership of the directory with our current system user: <br />
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/folderCreate.png) <br />
+Here you can see the steps from creation of folder to ownership change. Notice my current user was **ubuntu**
+
+* We are going to create a new configuration fiel in Apache's **sites-available** directory using command-line editor **vi**
+```bash
+sudo vi /etc/apache2/sites-available/projectlamp.conf
+```
+* This will create a new blank file. Paste in the following configuration by hitting on **i** on the keyboard to enter the insert mode, and paste the text:
+```bash
+<VirtualHost *:80>
+    ServerName projectlamp
+    ServerAlias www.projectlamp 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/projectlamp
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+To save file:
+1. Hit the **esc** button on the keyboard
+1. Type **:**
+1. Type **wq**. w for write and q for quit
+1. Hit **ENTER** to save the file
+
+* Use **ls** command to see the new file in the **sites-available** directory
+```bash
+sudo ls /etc/apache2/sites-available
+```
+    000-default.conf  default-ssl.conf  projectlamp.conf <Output
+
+* With this VirtualHost configuration, we’re telling Apache to serve projectlamp using **/var/www/projectlampl** as its web root directory.
+
+* We are using **a2ensite** command to enable the new virtual host:
+```bash
+sudo a2ensite projectlamp
+```
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/a2ensite.png) 
+
+* To avoid inteference we'll disable apache's default website using **a2dissite** command
+```bash
+sudo a2dissite 000-default
+```
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/a2dissite.png)
+
+* To make sure your configuration file doesn’t contain syntax errors, run:
+```bash
+sudo apache2ctl configtest
+```
+    Syntax OK
+
+* Finally, reload Apache so these changes take effect:
+```bash
+sudo systemctl reload apache2
+```
+
+* Now we will create a page insdie the web root **/var/www/projectlamp**
+```bash
+sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+```
+
+* Now if you go to your browser and navigate to the page with the pulic IP or DNS you'll see a page <br />
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/hellolamp.png)
+
+## ENABLE PHP ON THE WEBSITE
+---
+
+* Finally, we will create a PHP script in our custom location to test that PHP is correctly installed and configured on your server. we will create a new file **index.php**
+```bash
+vim /var/www/projectlamp/index.php
+```
+This will open a blank file. Add the following PHP code, inside the file:
+```php
+<?php
+phpinfo();
+```
+Save and close the file <br />
+
+* Before we test this php code make sure **index.html** is not present inside of **/var/www/projectlamp** by default Apache gives precendence to index.html over index.php when looking for page.
+
+* Once removed open your browser and navigate to you page using public IP or DNS
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/hellolamp.png)
