@@ -115,6 +115,45 @@ sudo apt install mysql-server
 sudo mysql_secure_installation
 ```
 And follow the wizard like questions
-* Will ask if you want to configure the VALIDATE PASSWORD PLUGIN. I'll put yes for an additioanl layer of security
+* Will ask if you want to configure the VALIDATE PASSWORD PLUGIN. I'll put yes for an additioanl layer of security <br />
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_SATCK/main/images/validate.png) <br />
+Keep answering the questions till the end
 
+* When you’re finished, test if you’re able to log in to the MySQL console by typing:
+```bash
+sudo mysql
+```
+You should see
+```bash
+mysql> 
+```
+* To exit type **exit**
+```bash
+mysql> exit
+Bye
+```
 
+## INSTALLING PHP
+---
+
+* Using previous method we are going to isntall 3 packages for php
+```bash
+sudo apt install php libapache2-mod-php php-mysql -y
+```
+* Once installation is done confirm you indeed have php intalled by checkig the version
+```bash
+php -v
+```
+* At this point you have a fully operational **LAMP**
+
+## CREATING A VIRTUAL HOST FOR YOUR WEBSITE USING APACHE
+---
+* Virtual host allows you to have multiple websites located on a single machine and users of the websites will not even notice it.
+
+* Apache on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents from the **/var/www/html** directory.
+We will leave this configuration as is and will add our own directory next next to the default one.
+Create the directory for **projectlamp** using **mkdir** command as follows:
+```bash
+sudo mkdir /var/www/projectlamp
+```
+* Next, we'll assign ownership of the directory with our current system user:
