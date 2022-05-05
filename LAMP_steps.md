@@ -238,3 +238,5 @@ Save and close the file <br />
 ```bash
 sudo rm /var/www/projectlamp/index.php
 ```
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/LAMP_STACK/main/images/Animationtest.gif)
+
